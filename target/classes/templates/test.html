@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Top News</title>
+</head>
+<body>
+<h3>Spring Boot and Thymeleaf</h3>
+<p>Hello World!</p>
+<th:block th:if="${#lists.isEmpty(news)}">
+    <h3>No documents avalible</h3>
+</th:block>
+<th:block th:unless="${#lists.isEmpty(news)}">
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>content</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tintuc,iteStat:${news}">
+                <td th:text="${iteStat.count}"></td>
+                <td th:text="${tintuc.content}"></td>
+            </tr>
+        </tbody>
+    </table>
+</th:block>
+</body>
+</html>
