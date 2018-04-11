@@ -93,9 +93,7 @@ public class ThoiDaiCrawler implements ICrawler {
     @Override
     public String getImage(Document doc, String element) {
 
-        Element image = doc.selectFirst("#dnn_ctr519_Main_UserNewsDetail_up >" +
-                " div" +
-                ".xcontents");
+        Element image = doc.selectFirst(IMAGE_SELECTOR);
 //        System.out.println(image.getElementsByClass("xitemn xphoto").attr("href"));
 //        System.out.println(doc.baseUri());
         return image.getElementsByClass("xitemn xphoto").attr("href");
@@ -154,9 +152,13 @@ public class ThoiDaiCrawler implements ICrawler {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        ThoiDaiCrawler crawler = new ThoiDaiCrawler();
-//        crawler.getData();
+        Document doc=Jsoup.connect("http://thoidai.com.vn//an-toan-giao-thong/da-nang-xe-dau-keo-mat-lai-thung-container-vang-xuong-duong-khien-nhieu-nguoi-thot-tim_t114c95n61996")
+                .get();
+        Element element=doc.selectFirst(IMAGE_SELECTOR+">img");
+        String s=element.attr("src");
+        System.out.println(s);
+
     }
 }

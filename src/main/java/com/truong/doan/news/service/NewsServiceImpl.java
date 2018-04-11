@@ -5,6 +5,8 @@ import com.truong.doan.news.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NewsServiceImpl implements NewsService {
 
@@ -19,5 +21,11 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public News save(News news) {
         return newsRepository.save(news);
+    }
+
+    @Override
+    public List<News> getNewsForIndexPage(int numberNews){
+
+        return newsRepository.getNewsForIndexPage(numberNews);
     }
 }

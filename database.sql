@@ -16,15 +16,15 @@ CREATE index idx_category on category(id);
 -- Create table newspaper
 create table news(
 	id int not null auto_increment,
-  title text not null,
-  image text,
-  description text not null,
-  content text not null,
-  releash_date text,
-  source text not null,
-  category_id int not null,
-  primary key(id),
-  FOREIGN KEY (category_id) REFERENCES category(id)
+	title text not null,
+	image text,
+	description text not null,
+	content text not null,
+	releash_date text,
+	source text not null,
+	category_id int not null,
+	primary key(id),
+	FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
 create index idx_news on news(id);

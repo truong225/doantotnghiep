@@ -21,7 +21,7 @@ public class NewsController {
 
     @GetMapping("/")
     public String index(Model model){
-//        model.addAttribute("listNews",newsService.);
+        model.addAttribute("listNews",newsService.getNewsForIndexPage(10000));
         return "index";
     }
 
