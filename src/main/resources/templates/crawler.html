@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+
+    <link rel="icon" href="img/favicon.ico">
+    <title>Tin tức tổng hợp</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/mediumish.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- Begin Nav
+================================================== -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="container">
+        <!-- Begin Logo -->
+        <a class="navbar-brand" href="index.html">
+            <img src="img/logo.png" alt="logo">
+        </a>
+        <!-- End Logo -->
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <!-- Begin Menu -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="crawler.html">Tin tức
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="post.html">Người dùng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="setting.html"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="setting.html">Tùy chỉnh</a>
+                </li>
+            </ul>
+            <!-- End Menu -->
+            <!-- Begin Search -->
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search...">
+                <a href="search.html?q=search+string/">
+                        <span class="search-icon">
+                            <svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25">
+                                <path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path>
+                            </svg>
+                        </span>
+                </a>
+            </form>
+            <!-- End Search -->
+        </div>
+    </div>
+</nav>
+<!-- End Nav
+================================================== -->
+
+<div class="container">
+    <div style="align-content: center; text-align: center">
+        <select title="Nguồn dữ liệu">
+            <option disabled selected>----- Chọn nguồn tin -----</option>
+            <option th:each="nguon:${listSource}" th:text="nguon"></option>
+        </select>
+
+        <select>
+            <option disabled selected>----- Chọn danh mục -----</option>
+            <option th:each="danhMuc:${listCategory}" th:text="${danhMuc.getName()}"></option>
+        </select>
+
+        <button>Lấy dữ liệu</button>
+    </div>
+    <div>
+        <table id="my-table">
+            <tr>
+                <th>Mô tả</th>
+                <th>Nội dung</th>
+                <th>Ảnh bìa</th>
+            </tr>
+            <tr>
+                <td>SSS</td>
+                <td>SSS</td>
+                <td>SSS</td>
+            </tr>
+            <tr>
+                <td>SSS</td>
+                <td>SSS</td>
+                <td>SSS</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<style>
+    select:disabled {
+        color: gray;
+        font-style: italic;
+    }
+
+    #my-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #my-table td,
+    #my-table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #my-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #my-table tr:hover {
+        background-color: #ddd;
+    }
+
+    #my-table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+</body>

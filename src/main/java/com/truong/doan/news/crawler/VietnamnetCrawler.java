@@ -73,7 +73,7 @@ public class VietnamnetCrawler implements ICrawler {
     }
 
     @Override
-    public void getData(NewsService newsService) {
+    public void getData(/*NewsService newsService*/) {
 
     }
 

@@ -19,5 +19,5 @@ public interface ICrawler {
 
     String getSource(Document doc);
 
-    void getData(NewsService newsService);
+    void getData(/*NewsService newsService*/);
 }

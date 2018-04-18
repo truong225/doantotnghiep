@@ -2,7 +2,6 @@ package com.truong.doan.news.crawler;
 
 import com.truong.doan.news.module.News;
 import com.truong.doan.news.service.NewsService;
-import com.truong.doan.news.service.NewsServiceImpl;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -38,20 +37,6 @@ public class ThoiDaiCrawler implements ICrawler {
         linkPostList = new ArrayList<>();
     }
 
-    /**
-     * Link list:
-     * http://thoidai.com.vn/_t57c0
-     * http://thoidai.com.vn/thoi-su_t113c3
-     * http://thoidai.com.vn/kinh-te_t113c14
-     * http://thoidai.com.vn/giao-duc_t113c20
-     * http://thoidai.com.vn/suc-khoe_t113c23
-     * http://thoidai.com.vn/ban-nam-chau_t113c34
-     * http://thoidai.com.vn/tam-long-be-ban_t113c35
-     * http://thoidai.com.vn/van-hoa-du-lich_t113c9
-     * http://thoidai.com.vn/the-gioi_t113c6
-     * http://thoidai.com.vn/van-hoa-du-lich/diem-den_t113c12
-     * http://thoidai.com.vn/an-toan-giao-thong_t113c95
-     */
     @Override
     public void getLinkList() {
 
@@ -68,19 +53,27 @@ public class ThoiDaiCrawler implements ICrawler {
             System.out.println("Done");
 
 
-            //Access all link and get data
+            //Access all link and get all posts
             for (String link : categoryLinkList) {
                 doc = Jsoup.connect(DOMAIN_NAME + link).get();
                 Elements e = doc.select("#dnn_ctr530_ModuleContent > div.tncndemo_wrap > div.contentx > div > a");
                 e.forEach(element -> {
-                    if (element.attr("style").contains("display:block;"))
-                        linkPostList.add(element.attr("href"));
+//                    if (element.attr("style").contains("display:block;"))
+//                        linkPostList.add(element.attr("href"));
+
+
+                    System.out.println(element.parents().select("div>span.xdate").text());
                 });
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void isOutDate(Document doc, String element){
+        Element date=doc.selectFirst("#dnn_ctr530_Main_UserNewsCategory_rptFocus_ctl00_Label1");
+//        System.out.println(date);
     }
 
     @Override
@@ -123,11 +116,11 @@ public class ThoiDaiCrawler implements ICrawler {
     }
 
     @Override
-    public void getData(NewsService newsService) {
+    public void getData(/*NewsService newsService*/) {
 
         getLinkList();
 
-        System.out.println("Get all links of post...");
+        System.out.println("Get all data of post...");
 
         for (String link : linkPostList) {
             try {
@@ -139,13 +132,17 @@ public class ThoiDaiCrawler implements ICrawler {
                 String date = getDate(doc, DATE_SELECTOR);
                 String source = getSource(doc);
 
-                if (image.equals(null))
-                    continue;
-                else {
+//                if (image.equals(null))
+//                    continue;
+//                else {
+//
+//                    News news = new News(title, image, description, content, date, source);
+//                    newsService.save(news);
+//                }
 
-                    News news = new News(title, image, description, content, date, source);
-                    newsService.save(news);
-                }
+                // Demo psudo code
+                System.out.println(date);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -153,12 +150,7 @@ public class ThoiDaiCrawler implements ICrawler {
     }
 
     public static void main(String[] args) throws IOException {
-
-        Document doc=Jsoup.connect("http://thoidai.com.vn//an-toan-giao-thong/da-nang-xe-dau-keo-mat-lai-thung-container-vang-xuong-duong-khien-nhieu-nguoi-thot-tim_t114c95n61996")
-                .get();
-        Element element=doc.selectFirst(IMAGE_SELECTOR+">img");
-        String s=element.attr("src");
-        System.out.println(s);
-
+        ThoiDaiCrawler thoiDaiCrawler=new ThoiDaiCrawler();
+        thoiDaiCrawler.getLinkList();
     }
 }

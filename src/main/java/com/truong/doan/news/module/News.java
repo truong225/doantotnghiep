@@ -35,6 +35,10 @@ public class News implements Serializable {
     @Column(name = "source", nullable = false)
     private String source;
 
+    public int getId(){return id;}
+
+    public void setId(int id){this.id=id;}
+
     public String getImage() {
         return image;
     }

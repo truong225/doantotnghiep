@@ -9,4 +9,5 @@ public interface NewsService {
     Iterable<News> findAll();
     News save(News news);
     List<News> getNewsForIndexPage(int numberNews);
+    News getPost(Integer id);
 }
