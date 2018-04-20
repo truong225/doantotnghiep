@@ -10,4 +10,5 @@ public interface NewsService {
     News save(News news);
     List<News> getNewsForIndexPage(int numberNews);
     News getPost(Integer id);
+    List<News> getPostInCategory(Integer catId);
 }

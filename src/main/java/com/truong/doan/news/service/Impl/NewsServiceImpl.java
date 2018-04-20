@@ -25,7 +25,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<News> getNewsForIndexPage(int numberNews){
+    public List<News> getNewsForIndexPage(int numberNews) {
 
         return newsRepository.getNewsForIndexPage(numberNews);
     }
@@ -33,5 +33,10 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public News getPost(Integer id) {
         return newsRepository.getOne(id);
+    }
+
+    @Override
+    public List<News> getPostInCategory(Integer catId) {
+        return newsRepository.getAllNewInCategory(catId);
     }
 }

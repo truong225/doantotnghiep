@@ -12,4 +12,7 @@ public interface NewsRepository extends JpaRepository<News, Integer> {
     @Query(value = "SELECT * FROM News n Limit 0,:numberNews",
             nativeQuery = true)
     List<News> getNewsForIndexPage(@Param("numberNews") int numberNews);
+
+    @Query(value = "SELECT n FROM News n INNER JOIN n.category")
+    List<News> getAllNewInCategory(@Param("catId") Integer catId);
 }

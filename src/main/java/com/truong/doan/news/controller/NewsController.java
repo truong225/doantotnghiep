@@ -37,4 +37,11 @@ public class NewsController {
         model.addAttribute("article", newsService.getPost(postId));
         return "post";
     }
+
+    @RequestMapping("/category/{catId}")
+    public String getPostListCategory(@PathVariable Integer catId, Model model){
+        model.addAttribute("listNews", newsService.getPostInCategory(catId));
+        model.addAttribute("categoryInfo", categoryService.getOne(catId));
+        return "category";
+    }
 }

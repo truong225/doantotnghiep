@@ -35,6 +35,10 @@ public class News implements Serializable {
     @Column(name = "source", nullable = false)
     private String source;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     public int getId(){return id;}
 
     public void setId(int id){this.id=id;}

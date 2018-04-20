@@ -58,11 +58,10 @@ public class ThoiDaiCrawler implements ICrawler {
                 doc = Jsoup.connect(DOMAIN_NAME + link).get();
                 Elements e = doc.select("#dnn_ctr530_ModuleContent > div.tncndemo_wrap > div.contentx > div > a");
                 e.forEach(element -> {
-//                    if (element.attr("style").contains("display:block;"))
+                    if (element.attr("style").contains("display:block;"))
 //                        linkPostList.add(element.attr("href"));
+                        System.out.println(element.attr("href"));
 
-
-                    System.out.println(element.parents().select("div>span.xdate").text());
                 });
             }
 

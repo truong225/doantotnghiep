@@ -22,4 +22,9 @@ public class CategoryServiceImpl implements CategoryService {
     public Iterable<Category> getAll() {
         return categoryRepository.findAll();
     }
+
+    @Override
+    public Category getOne(Integer id) {
+        return categoryRepository.getOne(id);
+    }
 }

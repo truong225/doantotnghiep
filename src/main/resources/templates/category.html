@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/indexhead :: indexhead"></head>
+<body>
+
+<!-- Begin Nav
+================================================== -->
+<nav th:replace="common/menubar :: menubar"></nav>
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Site Title
+================================================== -->
+<div class="container">
+    <div class="mainheading">
+        <h1>Menu Tin tức</h1>
+        <p class="lead">
+            Website tìm kiếm và tổng hợp tin tức
+        </p>
+    </div>
+    <!-- End Site Title
+    ================================================== -->
+
+    <!-- Begin Noi dung de xuat
+    ================================================== -->
+    <section class="featured-posts">
+        <div class="section-title">
+            <h2><span th:text="${categoryInfo.getName()}"></span></h2>
+        </div>
+
+        <th:block th:unless="${#lists.isEmpty(listNews)}">
+            <div class="card-columns listfeaturedtag">
+
+                <!-- begin post -->
+                <div class="card" th:each="tinMoi:${listNews}">
+                    <div class="row">
+                        <div class="col-md-5 wrapthumbnail">
+                            <a th:href="@{'~/post/' + ${tinMoi.getId()}}">
+
+                                <div class="thumbnail"
+                                     th:attr="data-src=${tinMoi.getImage()}">
+                                </div>
+
+                            </a>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-block">
+                                <h2 class="card-title">
+
+                                    <a th:href="@{'~/post/' + ${tinMoi.getId()}}"
+                                       th:text="${tinMoi.getTitle()}"></a>
+
+                                </h2>
+
+                                <th:block th:if="${#strings.length(tinMoi.getDescription())<80}">
+                                    <h4 class="card-text"
+                                        th:text="${tinMoi.getDescription()}">
+                                    </h4>
+                                </th:block>
+                                <th:block th:unless="${#strings.length(tinMoi.getDescription())<80}">
+                                    <h4 class="card-text"
+                                        th:text="${#strings.substring(tinMoi.getDescription(),0,80)+'...'}">
+                                    </h4>
+                                </th:block>
+
+                                <div class="metafooter">
+                                    <div class="wrapfooter">
+									<span class="meta-footer-thumb">
+									</span>
+                                        <span class="author-meta">
+									<span class="post-name"><a
+                                            href="setting.html">Truong</a></span><br/>
+									<span class="post-date" th:text="${tinMoi.getReleashDate()}"></span>
+									</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end post -->
+
+            </div>
+        </th:block>
+    </section>
+    <!-- End Noi dung de xuat
+    ================================================== -->
+
+    <!-- Begin Tin moi
+    ================================================== -->
+    <section class="recent-posts">
+        <div class="section-title">
+            <h2><span>Có thể bạn quan tâm (ngoài danh mục yêu thích)</span></h2>
+        </div>
+        <div class="card-columns listrecent">
+
+            <!-- begin post -->
+            <div class="card">
+                <a href="post.html">
+                    <img class="img-fluid" src="">
+                </a>
+                <div class="card-block">
+                    <h2 class="card-title">
+                        <a href="post.html">
+                            <!--Tiêu đề bài viết-->
+                        </a>
+                    </h2>
+
+                    <h4 class="card-text">
+                        <!--Mô tả-->
+                    </h4>
+                </div>
+            </div>
+            <!-- end post -->
+        </div>
+    </section>
+    <!-- End Tin moi
+    ================================================== -->
+</div>
+<!-- /.container -->
+
+<div th:replace="common/footer :: footer"></div>
+
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{~/js/jquery.min.js}"></script>
+<script th:src="@{~/js/bootstrap.min.js}"></script>
+<script th:src="@{~/js/ie10-viewport-bug-workaround.js}"></script>
+<script th:src="@{~/js/tether.min.js}" crossorigin="anonymous"></script>
+
+<script type="text/javascript" th:src="@{~/js/jquery.lazy.min.js}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $('.thumbnail').Lazy({
+            effect:"fadeIn",
+            effectTime: 500,
+            threshold: 0
+        });
+    });
+</script>
+</body>
+</html>
