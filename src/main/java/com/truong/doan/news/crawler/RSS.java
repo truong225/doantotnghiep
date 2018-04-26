@@ -1,6 +1,8 @@
 package com.truong.doan.news.crawler;
 
+import java.util.List;
+
 public interface RSS {
 
-    void crawl();
+    List<String> crawl();
 }

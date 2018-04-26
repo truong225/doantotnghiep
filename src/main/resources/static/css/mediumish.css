@@ -53,13 +53,13 @@ section {
 	margin-bottom:20px;
 }
 .listfeaturedtag .wrapthumbnail {
-	height:258px;
+	/* height:258px; */
 	flex:0 0 auto;
 }
 .listfeaturedtag .card {
-	border:1px solid rgba(0,0,0,.1);
+	border:1px solid rgba(56, 56, 56, 0.1);
 	border-radius:2px;
-	height:260px;
+	/* height:260px; */
 	padding-left:0;
 	margin-bottom:15px;
 }

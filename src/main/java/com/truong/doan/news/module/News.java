@@ -1,10 +1,12 @@
 package com.truong.doan.news.module;
 
 
+import com.truong.doan.news.common.StringUtility;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "news")
@@ -17,31 +19,39 @@ public class News implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title")
     private String title;
 
     @Column(name = "image")
     private String image;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "link")
+    private String link;
+
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "content", nullable = false)
-    private String content;
+    @Column(name = "publishDate")
+    private String publishDate;
 
-    @Column(name = "releash_date")
-    private String releashDate;
-
-    @Column(name = "source", nullable = false)
-    private String source;
+    @Column(name = "rss_guid")
+    private String rssGuid;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public int getId(){return id;}
+    public int getId() {
+        return id;
+    }
 
-    public void setId(int id){this.id=id;}
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getImage() {
         return image;
@@ -49,6 +59,22 @@ public class News implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
     }
 
     public String getDescription() {
@@ -59,50 +85,32 @@ public class News implements Serializable {
         this.description = description;
     }
 
-    public String getTitle() {
-
-        return title;
+    public String getRssGuid() {
+        return rssGuid;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setRssGuid(String rssGuid) {
+        this.rssGuid = rssGuid;
     }
 
-    public String getContent() {
-        return content;
+    public void setCategory(Category category) {
+        this.category = category;
     }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getReleashDate() {
-        return releashDate;
-    }
-
-    public void setReleashDate(String releashDate) {
-        this.releashDate = releashDate;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
 
     public News() {
     }
 
-    public News(String title, String image, String description,
-                String content, String releashDate, String source) {
+    public News(String title,
+                String image,
+                String link,
+                String description,
+                String publishDate,
+                String rssGuid) {
         setTitle(title);
         setImage(image);
+        setLink(link);
         setDescription(description);
-        setContent(content);
-        setReleashDate(releashDate);
-        setSource(source);
+        setPublishDate(publishDate);
+        setRssGuid(rssGuid);
     }
 }

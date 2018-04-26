@@ -1,42 +1,47 @@
--- Create database
-drop database if exists newspaper;
-create database newspaper CHARACTER SET utf8 COLLATE utf8_general_ci;
-use newspaper;
+create database news;
+use news;
 
--- Create table Category
 create table category(
-	id int not null auto_increment,
-  name text not null,
-  primary key(id)
+  id int primary key ,
+  name nvarchar(50)
 );
 
-CREATE index idx_category on category(id);
-
-
--- Create table newspaper
 create table news(
-	id int not null auto_increment,
-	title text not null,
-	image text,
-	description text not null,
-	content text not null,
-	releash_date text,
-	source text not null,
-	category_id int not null,
-	primary key(id),
-	FOREIGN KEY (category_id) REFERENCES category(id)
+  id int primary key ,
+  tittle nvarchar(100),
+  image text,
+  source text,
+  publishDate datetime,
+  guid text,
+  category_id int,
+  foreign key (category_id) references category(id)
 );
 
-create index idx_news on news(id);
+create table rss(
+  id int primary key ,
+  name nvarchar(50),
+  link text,
+  category_id int,
+  foreign key (category_id) references category(id)
+);
 
+create table user(
+  id int primary key ,
+  username nvarchar(50),
+  password text,
+  fullname nvarchar(50),
+  email text,
+  phone nvarchar(12),
+  addDate datetime,
+  lastModified datetime,
+  description text,
+  status nvarchar(10)
+);
 
--- Create table User
-CREATE TABLE user(
-  id int not null auto_increment,
-  name nvarchar(30) not null,
-  password nvarchar(256) not null,
-  PRIMARY KEY (id)
+create table favorite(
+  id int primary key ,
+  user_id int,
+  category_id int,
+  foreign key (user_id) references user(id),
+  foreign key (category_id) references category(id)
 )
-
-
-select * from news;
